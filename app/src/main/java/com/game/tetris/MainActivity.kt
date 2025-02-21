@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.game.tetris.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +26,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnResetScore.setOnClickListener {
+                val preferences = AppPreferences(this@MainActivity)
+                preferences.clearHighScore()
 
+                Snackbar.make(binding.root, "Score successfully reset", Snackbar.LENGTH_SHORT).show()
+                tvHighScore.text = "High score: ${preferences.getHighScore()}"
             }
         }
     }
